@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
     s.homepage         = 'https://github.com/RobertBiehl/caffe2-ios'
     s.license          = { :type => 'Apache License 2.0', :file => 'LICENSE' }
     s.authors          = 'robert@oksnap.me'
-    s.source           = { :git => 'https://github.com/RobertBiehl/caffe2-ios', :branch => 'master', :submodules => true}
+    s.source           = { :git => 'https://github.com/RobertBiehl/caffe2-ios', :tag => s.version, :submodules => true}
 
     s.ios.deployment_target = '10.3'
     
