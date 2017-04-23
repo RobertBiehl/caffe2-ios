@@ -4,15 +4,14 @@ Pod::Spec.new do |s|
     s.summary          = 'Caffe2 for iOS (Swift, ObjC). A simple one step integration'
 
     s.description      = <<-DESC
-Caffe2 for iOS. A simple, one step integration into existing projects.
-Caffe2 is a lightweight, modular, and scalable deep learning framework.
+      Caffe2 for iOS. A simple, one step integration into existing projects.
+      Caffe2 is a lightweight, modular, and scalable deep learning framework.
     DESC
 
     s.homepage         = 'https://github.com/RobertBiehl/caffe2-ios'
     s.license          = { :type => 'Apache License 2.0', :file => 'LICENSE' }
     s.authors          = 'robert@oksnap.me'
-    s.source       = { :path => '/Users/Robert/Documents/Workspace/caffe2-swift' }
-#s.source           = { :git => 'https://github.com/RobertBiehl/caffe2-ios', :branch => 'master', :submodules => true}
+    s.source           = { :git => 'https://github.com/RobertBiehl/caffe2-ios', :branch => 'master', :submodules => true}
 
     s.ios.deployment_target = "10.3"
     
@@ -29,11 +28,11 @@ Caffe2 is a lightweight, modular, and scalable deep learning framework.
     
     s.subspec 'CPU' do |ss|
       ss.header_mappings_dir = "lib/caffe2/install/include/"
+      ss.preserve_paths = "lib/caffe2/install/include/*", "lib/caffe2/install/include/**/*", "lib/caffe2/third_party/eigen/Eigen/*", "lib/caffe2/third_party/eigen/Eigen/**/*",
       
       ss.xcconfig = {
-        'HEADER_SEARCH_PATHS' =>  '$(inherited) "/Users/Robert/Documents/Workspace/caffe2-swift/lib/caffe2/install/include/" ' +
-        '"/Users/Robert/Documents/Workspace/caffe2-swift/lib/caffe2/third_party/eigen/"',
-        'OTHER_LDFLAGS' => '$(inherited) -Wl,-force_load,/Users/Robert/Documents/Workspace/caffe2-swift/lib/caffe2/install/lib/libCaffe2_CPU.a'
+        'HEADER_SEARCH_PATHS' =>  '$(inherited) "$(PODS_TARGET_SRCROOT)/lib/caffe2/install/include/" "$(PODS_TARGET_SRCROOT)/lib/caffe2/third_party/eigen/"',
+        'OTHER_LDFLAGS' => '$(inherited) -Wl,-force_load,$(PODS_TARGET_SRCROOT)/lib/caffe2/install/lib/libCaffe2_CPU.a'
       }
       
       ss.vendored_libraries  = 'lib/caffe2/install/lib/libCaffe2_CPU.a',

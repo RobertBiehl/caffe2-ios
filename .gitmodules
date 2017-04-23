@@ -1,3 +1,4 @@
 [submodule "lib/caffe2"]
 	path = lib/caffe2
 	url = https://github.com/caffe2/caffe2
+	ignore = dirty

@@ -4,10 +4,15 @@ A simple, one step integration into existing projects.
 
 ![Caffe2Kit - Simple integration of Caffe2 on iOS.](https://github.com/RobertBiehl/caffe2-ios/blob/master/.github/cover.png)
 
+[![Twitter](https://img.shields.io/badge/Twitter-robeffect-4099FF.svg?style=flat)](https://twitter.com/robeffect)
+[![Caffe2](https://img.shields.io/badge/Dep-caffe2-green.svg)](https://caffe2.ai)
+[![Req](https://img.shields.io/badge/Req-iOS_10.3-green.svg)](https://github.com/RobertBiehl/caffe2-ios)
+[![Build time](https://img.shields.io/badge/pod_install_takes-0h_40m_45s_:(-red.svg)](https://github.com/RobertBiehl/caffe2-ios)
+
 ## 🚨 Attention
 > Please note that this pod is in a very early stage and currently has multiple shortcomings:
 > * Only works on the device! -- *no simulator support*
-> * `pod install` takes ages! -- *currently caffe2 is being built on install*
+> * `pod install` takes ages! -- **I'm not kidding!! I waited 0h 40m 45s on a Mid 2012 Macbook Pro Retina! Currently caffe2 is being built on install.**
 > * Only runs on iOS 10.3! -- *should be fixed soon by udating the build_ios_pod.sh build script"
 > * Wrapper currently only supports classification tasks.
 
@@ -54,6 +59,10 @@ if let res = caffe?.predict(🌅) {
 568: fur coat 3.20833%
 539: doormat, welcome mat 0.846964%
 ```
+
+## ⏱ Performance
+
+Prediciting the class in the example app `examples/Caffe2Test` takes approx, 2ms on an iPhone 7 Plus and 6ms on an iPhone 6.
 
 ## ✅ Requirements
 
