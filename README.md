@@ -1,5 +1,5 @@
-# Caffe2Swift
-[Caffe2](https://github.com/caffe2/caffe2) for Swift.
+# Caffe2iOS
+[Caffe2](https://github.com/caffe2/caffe2) for iOS.
 A simple, one step integration into existing projects.
 
 ## 🚨 Attention
@@ -24,7 +24,7 @@ pod "Caffe2Swift"
 
 ## 🚀 Using Caffe2Swift
 
-```swift3
+```swift
 import Caffe2
 
 caffe = Caffe2("squeeze_init_net", predict:"squeeze_predict_net")
