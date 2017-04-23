@@ -13,6 +13,7 @@ A simple, one step integration into existing projects.
 > Please note that this pod is in a very early stage and currently has multiple shortcomings:
 > * Only works on the device! -- *no simulator support*
 > * `pod install` takes ages! -- **I'm not kidding!! I waited 0h 40m 45s on a Mid 2012 Macbook Pro Retina! Currently caffe2 is being built on install.**
+> * No officially on CocoaPods yet! -- *because this lib does not run on the simulator yet* 
 > * Only runs on iOS 10.3! -- *should be fixed soon by udating the build_ios_pod.sh build script*
 > * Wrapper currently only supports classification tasks.
 
