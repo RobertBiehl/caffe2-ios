@@ -58,6 +58,6 @@ Robert Biehl, robert@oksnap.me
 
 ## 📄 License
 
-Caffe2Swift is available under the MIT license. See the LICENSE file for more info.
+Caffe2Swift is available under the Apache License 2.0. See the LICENSE file for more info.
 
 Caffe2 is released under the [BSD 2-Clause license](https://github.com/Yangqing/caffe2/blob/master/LICENSE).
