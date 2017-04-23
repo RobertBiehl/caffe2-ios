@@ -34,7 +34,7 @@ class ViewController: UIViewController {
         .map{"\($0.offset): \(classes[$0.offset]) \($0.element*100)%"}
         .joined(separator: "\n")
       
-      println("Result\n \"(text)")
+      print("Result\n\(text)")
       textView.text = text
       imageView.image = 🌅
     }

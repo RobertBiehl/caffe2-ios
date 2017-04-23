@@ -13,26 +13,25 @@ Pod::Spec.new do |s|
     s.authors          = 'robert@oksnap.me'
     s.source           = { :git => 'https://github.com/RobertBiehl/caffe2-ios', :branch => 'master', :submodules => true}
 
-    s.ios.deployment_target = "10.3"
+    s.ios.deployment_target = '10.3'
     
     s.default_subspecs = %[Core]
     
     s.subspec 'Core' do |ss|
-      ss.dependency "Caffe2Kit/CPU"
+      ss.dependency 'Caffe2Kit/CPU'
 
-      ss.source_files = "src/*{.h,.m,.hh,.mm}"
-      ss.public_header_files = "src/Caffe2.h"
+      ss.source_files = 'src/*{.h,.m,.hh,.mm}'
+      ss.public_header_files = 'src/Caffe2.h'
       
       s.libraries = 'stdc++'
     end
     
     s.subspec 'CPU' do |ss|
-      ss.header_mappings_dir = "lib/caffe2/install/include/"
-      ss.preserve_paths = "lib/caffe2/install/include/*", "lib/caffe2/install/include/**/*", "lib/caffe2/third_party/eigen/Eigen/*", "lib/caffe2/third_party/eigen/Eigen/**/*",
-      
+      ss.header_mappings_dir = 'lib/caffe2/install/include/'
+
       ss.xcconfig = {
         'HEADER_SEARCH_PATHS' =>  '$(inherited) "$(PODS_TARGET_SRCROOT)/lib/caffe2/install/include/" "$(PODS_TARGET_SRCROOT)/lib/caffe2/third_party/eigen/"',
-        'OTHER_LDFLAGS' => '$(inherited) -Wl,-force_load,$(PODS_TARGET_SRCROOT)/lib/caffe2/install/lib/libCaffe2_CPU.a'
+        'OTHER_LDFLAGS' => '$(inherited) -Wl,-force_load,$(PODS_ROOT)/Caffe2Kit/lib/caffe2/install/lib/libCaffe2_CPU.a'
       }
       
       ss.vendored_libraries  = 'lib/caffe2/install/lib/libCaffe2_CPU.a',
