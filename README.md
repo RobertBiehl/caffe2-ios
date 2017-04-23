@@ -13,16 +13,16 @@ A simple, one step integration into existing projects.
 > Please note that this pod is in a very early stage and currently has multiple shortcomings:
 > * Only works on the device! -- *no simulator support*
 > * `pod install` takes ages! -- **I'm not kidding!! I waited 0h 40m 45s on a Mid 2012 Macbook Pro Retina! Currently caffe2 is being built on install.**
-> * Only runs on iOS 10.3! -- *should be fixed soon by udating the build_ios_pod.sh build script"
+> * Only runs on iOS 10.3! -- *should be fixed soon by udating the build_ios_pod.sh build script*
 > * Wrapper currently only supports classification tasks.
 
 ## 📲 Installation
 
-Caffe2Kit is available through [CocoaPods](http://cocoapods.org). To install
+Caffe2Kit ~~is~~ *will soon be* available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod "Caffe2Kit"
+pod 'Caffe2Kit', :git => 'git://github.com/RobertBiehl/caffe2-ios', :submodules => true
 ```
 
 ## 🚀 Using Caffe2Kit
