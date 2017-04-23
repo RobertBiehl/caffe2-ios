@@ -1,4 +1,4 @@
-# Caffe2Kit
+# ☕️ Caffe2Kit
 [Caffe2](https://github.com/caffe2/caffe2) for iOS.
 A simple, one step integration into existing projects.
 
