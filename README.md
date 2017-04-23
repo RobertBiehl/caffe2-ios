@@ -53,12 +53,12 @@ if let res = caffe?.predict(🌅) {
 **Result:**
 
 ```
-291: 🦁 57.5012%
-283: 🐈 19.2037%
-378: 🐒 11.6096%
-903: 💇 6.85409%
-568: fur coat 3.20833%
-539: doormat, welcome mat 0.846964%
+291: 🦁 lion, king of beasts, Panthera leo 100.0%
+373: 🐒 macaque 3.59472e-08%
+231: 🐕 collie 4.77662e-09%
+374: 🐒 langur 1.63787e-09%
+371: 🐒 patas, hussar monkey, Erythrocebus patas 5.34424e-10%
+259: 🐶 Pomeranian 2.12385e-10%
 ```
 
 ## ⏱ Performance
