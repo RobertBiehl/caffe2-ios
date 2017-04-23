@@ -6,6 +6,8 @@
 //  Copyright © 2017 Robert Biehl. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 #import "Caffe2.h"
 
 #include "caffe2/core/predictor.h"
@@ -87,9 +89,16 @@ std::string FilePathForResourceName(NSString* name, NSString* extension) {
       for (auto j = 0; j < predWidth; ++j) {
         const int _j = (int) (scale * j);
         // The input is of the form RGBA, we only need the RGB part.
-        inputPlanar[i * predWidth + j + 0 * size] = (float) pixels[(_i * width + _j) * 4 + 2];
-        inputPlanar[i * predWidth + j + 1 * size] = (float) pixels[(_i * width + _j) * 4 + 0];
-        inputPlanar[i * predWidth + j + 2 * size] = (float) pixels[(_i * width + _j) * 4 + 1];
+        float blue = (float) pixels[(_i * width + _j) * 4 + 0];
+        float green = (float) pixels[(_i * width + _j) * 4 + 1];
+        float red = (float) pixels[(_i * width + _j) * 4 + 2];
+        if(_j==19){
+          printf("%d,%d RGB(%f, %f, %f)\n", i, _j, red, green, blue);
+        }
+        
+        inputPlanar[i * predWidth + j + 0 * size] = blue;
+        inputPlanar[i * predWidth + j + 1 * size] = green;
+        inputPlanar[i * predWidth + j + 2 * size] = red;
       }
     }
     
