@@ -1,0 +1,20 @@
+PODS:
+  - Caffe2 (0.0.1):
+    - Caffe2/Core (= 0.0.1)
+  - Caffe2/Core (0.0.1):
+    - Caffe2/CPU
+  - Caffe2/CPU (0.0.1)
+
+DEPENDENCIES:
+  - Caffe2 (from `../../`)
+
+EXTERNAL SOURCES:
+  Caffe2:
+    :path: "../../"
+
+SPEC CHECKSUMS:
+  Caffe2: d703cfde7d9ab586ae989bea7223e6e17922a244
+
+PODFILE CHECKSUM: 8419941400206de5dcf9effd7752a0698813accd
+
+COCOAPODS: 1.2.0
