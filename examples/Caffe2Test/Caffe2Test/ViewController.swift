@@ -31,10 +31,10 @@ class ViewController: UIViewController {
       
       // generate output
       let text = sorted
-        .map{"\($0.offset) \(classes[$0.offset]) \($0.element*100)%"}
+        .map{"\($0.offset): \(classes[$0.offset]) \($0.element*100)%"}
         .joined(separator: "\n")
       
-      NSLog("Result %@", text)
+      println("Result\n \"(text)")
       textView.text = text
       imageView.image = 🌅
     }
