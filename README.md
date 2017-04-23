@@ -1,4 +1,4 @@
-# Caffe2iOS
+# Caffe2Kit
 [Caffe2](https://github.com/caffe2/caffe2) for iOS.
 A simple, one step integration into existing projects.
 
@@ -15,17 +15,17 @@ Deployment target of your App is >= iOS 10.3
 
 ## 📲 Installation
 
-Caffe2Swift is available through [CocoaPods](http://cocoapods.org). To install
+Caffe2Kit is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod "Caffe2Swift"
+pod "Caffe2Kit"
 ```
 
-## 🚀 Using Caffe2Swift
+## 🚀 Using Caffe2Kit
 
 ```swift
-import Caffe2
+import Caffe2Kit
 
 caffe = Caffe2("squeeze_init_net", predict:"squeeze_predict_net")
 let 🌅 = #imageLiteral(resourceName: "lion.png")
@@ -58,6 +58,6 @@ Robert Biehl, robert@oksnap.me
 
 ## 📄 License
 
-Caffe2Swift is available under the Apache License 2.0. See the LICENSE file for more info.
+Caffe2Kit is available under the Apache License 2.0. See the LICENSE file for more info.
 
 Caffe2 is released under the [BSD 2-Clause license](https://github.com/Yangqing/caffe2/blob/master/LICENSE).
