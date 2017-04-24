@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
     s.homepage         = 'https://github.com/RobertBiehl/caffe2-ios'
     s.license          = { :type => 'Apache License 2.0', :file => 'LICENSE' }
     s.authors          = 'robert@oksnap.me'
-    s.source           = { :git => 'https://github.com/RobertBiehl/caffe2-ios', :tag => s.version, :submodules => true}
+    s.source           = { :git => 'https://github.com/RobertBiehl/caffe2-ios', :branch => 'master', :submodules => true}
 
     s.ios.deployment_target = '10.3'
     
@@ -28,6 +28,9 @@ Pod::Spec.new do |s|
     
     s.subspec 'CPU' do |ss|
       ss.header_mappings_dir = 'lib/caffe2/install/include/'
+      #ss.source_files = 'lib/caffe2/install/include/**/*.h', 'lib/caffe2/third_party/eigen/Eigen/*'
+      #ss.private_header_files = 'lib/caffe2/install/include/**/*.h', 'lib/caffe2/third_party/eigen/Eigen/*'
+      ss.preserve_paths = 'lib/caffe2/install/include/**/*.h', 'lib/caffe2/third_party/eigen/Eigen/*', 'lib/caffe2/LICENSE', 'lib/caffe2/PATENTS'
 
       ss.xcconfig = {
         'HEADER_SEARCH_PATHS' =>  '$(inherited) "$(PODS_TARGET_SRCROOT)/lib/caffe2/install/include/" "$(PODS_TARGET_SRCROOT)/lib/caffe2/third_party/eigen/"',
