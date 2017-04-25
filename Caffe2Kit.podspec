@@ -31,8 +31,8 @@ Pod::Spec.new do |s|
       ss.preserve_paths = 'install/include/**/*.h', 'install/include/Eigen/*', 'lib/caffe2/LICENSE', 'lib/caffe2/PATENTS'
 
       ss.xcconfig = {
-        'HEADER_SEARCH_PATHS' =>  '$(inherited) "$(PODS_ROOT)/Caffe2Kit/install/include/" "$(PODS_ROOT)/Caffe2Kit/install/include/Eigen/"',
-        'OTHER_LDFLAGS' => '$(inherited) -Wl,-force_load,$(PODS_ROOT)/Caffe2Kit/install/lib/libCaffe2_CPU.a'
+        'HEADER_SEARCH_PATHS' =>  '$(inherited) "$(PODS_ROOT)/Caffe2Kit/install/include/" "$(PODS_ROOT)/Caffe2Kit/install/include/Eigen/"'
+        #'OTHER_LDFLAGS' => '$(inherited) -Wl,-force_load,$(PODS_ROOT)/Caffe2Kit/install/lib/libCaffe2_CPU.a'
       }
       
       ss.vendored_libraries  = 'install/lib/libCaffe2_CPU.a',
