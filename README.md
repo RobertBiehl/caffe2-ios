@@ -31,7 +31,7 @@ pod 'Caffe2Kit', :git => 'git://github.com/RobertBiehl/caffe2-ios', :submodules 
 ```swift
 import Caffe2Kit
 
-caffe = Caffe2("squeeze_init_net", predict:"squeeze_predict_net")
+let caffe = Caffe2("squeeze_init_net", predict:"squeeze_predict_net")
 let 🌅 = #imageLiteral(resourceName: "lion.png")
     
 if let res = caffe?.predict(🌅) {
@@ -46,7 +46,7 @@ if let res = caffe?.predict(🌅) {
     .map{"\($0.offset): \(classes[$0.offset]) \($0.element*100)%"}
     .joined(separator: "\n")
 
-  println("Result\n \(text)")
+  print("Result\n \(text)")
 }
 ```
 
