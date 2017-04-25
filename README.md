@@ -1,6 +1,6 @@
 # ☕️ Caffe2Kit
 [Caffe2](https://github.com/caffe2/caffe2) for iOS.
-A simple, one step integration into existing projects.
+A simple integration into existing projects.
 
 ![Caffe2Kit - Simple integration of Caffe2 on iOS.](https://github.com/RobertBiehl/caffe2-ios/blob/master/.github/cover.png)
 
@@ -12,7 +12,6 @@ A simple, one step integration into existing projects.
 ## 🚨 Attention
 > Please note that this pod is in a very early stage and currently has multiple shortcomings:
 > * Only works on the device! -- *no simulator support*
-> * `pod install` takes ages! -- **I'm not kidding!! I waited 0h 40m 45s on a Mid 2012 Macbook Pro Retina! Currently caffe2 is being built on install.**
 > * No officially on CocoaPods yet! -- *because this lib does not run on the simulator yet* 
 > * Only runs on iOS 10.3! -- *should be fixed soon by udating the build_ios_pod.sh build script*
 > * Wrapper currently only supports classification tasks.
@@ -23,15 +22,35 @@ Caffe2Kit ~~is~~ *will soon be* available through [CocoaPods](http://cocoapods.o
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'Caffe2Kit', :git => 'git://github.com/RobertBiehl/caffe2-ios', :submodules => true
+pod 'Caffe2Kit', :git => 'git://github.com/RobertBiehl/caffe2-ios'
 ```
+
+and run `pod install`.
+
+### Disable Bitcode
+Since caffe2 is not yet built with bitcode support you need to add this to your Podfile
+```
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['ENABLE_BITCODE'] = 'NO'
+    end
+  end
+end
+```
+and disable bitcode for your Target by setting **Build Settings -> Enable Bitcode** to `No`.
+
+### Additional steps:
+*These steps will hopefully be removed in later versions.*
+1) in **Build Phases -> Your Target -> Link Binary with Libraries** add `libstc++.tdb`.
+2) in **Build Settings -> Other Linker Flags** remove `$(inherited)`and `-force_load "$(PODS_ROOT)/Caffe2Kit/install/lib/libCaffe2_CPU.a"`
 
 ## 🚀 Using Caffe2Kit
 
 ```swift
 import Caffe2Kit
 
-caffe = Caffe2("squeeze_init_net", predict:"squeeze_predict_net")
+let caffe = Caffe2("squeeze_init_net", predict:"squeeze_predict_net")
 let 🌅 = #imageLiteral(resourceName: "lion.png")
     
 if let res = caffe?.predict(🌅) {
@@ -46,7 +65,7 @@ if let res = caffe?.predict(🌅) {
     .map{"\($0.offset): \(classes[$0.offset]) \($0.element*100)%"}
     .joined(separator: "\n")
 
-  println("Result\n \(text)")
+  print("Result\n \(text)")
 }
 ```
 

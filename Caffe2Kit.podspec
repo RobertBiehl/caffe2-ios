@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Caffe2Kit'
-    s.version          = '0.0.1'
+    s.version          = '0.0.6'
     s.summary          = 'Caffe2 for iOS (Swift, ObjC). A simple one step integration'
 
     s.description      = <<-DESC
@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
     s.homepage         = 'https://github.com/RobertBiehl/caffe2-ios'
     s.license          = { :type => 'Apache License 2.0', :file => 'LICENSE' }
     s.authors          = 'robert@oksnap.me'
-    s.source           = { :git => 'https://github.com/RobertBiehl/caffe2-ios', :branch => 'master', :submodules => true}
+    s.source           = { :git => 'https://github.com/RobertBiehl/caffe2-ios', :branch => 'prebuilt-binaries', :submodules => true}
 
     s.ios.deployment_target = '10.3'
     
@@ -27,21 +27,19 @@ Pod::Spec.new do |s|
     end
     
     s.subspec 'CPU' do |ss|
-      ss.header_mappings_dir = 'lib/caffe2/install/include/'
-      #ss.source_files = 'lib/caffe2/install/include/**/*.h', 'lib/caffe2/third_party/eigen/Eigen/*'
-      #ss.private_header_files = 'lib/caffe2/install/include/**/*.h', 'lib/caffe2/third_party/eigen/Eigen/*'
-      ss.preserve_paths = 'lib/caffe2/install/include/**/*.h', 'lib/caffe2/third_party/eigen/Eigen/*', 'lib/caffe2/LICENSE', 'lib/caffe2/PATENTS'
+      ss.header_mappings_dir = 'install/include/'
+      ss.preserve_paths = 'install/include/**/*.h', 'install/include/Eigen/*', 'lib/caffe2/LICENSE', 'lib/caffe2/PATENTS'
 
       ss.xcconfig = {
-        'HEADER_SEARCH_PATHS' =>  '$(inherited) "$(PODS_TARGET_SRCROOT)/lib/caffe2/install/include/" "$(PODS_TARGET_SRCROOT)/lib/caffe2/third_party/eigen/"',
-        'OTHER_LDFLAGS' => '$(inherited) -Wl,-force_load,$(PODS_ROOT)/Caffe2Kit/lib/caffe2/install/lib/libCaffe2_CPU.a'
+        'HEADER_SEARCH_PATHS' =>  '$(inherited) "$(PODS_ROOT)/Caffe2Kit/install/include/" "$(PODS_ROOT)/Caffe2Kit/install/include/Eigen/"',
+        'OTHER_LDFLAGS' => '-force_load "$(PODS_ROOT)/Caffe2Kit/install/lib/libCaffe2_CPU.a"'
       }
       
-      ss.vendored_libraries  = 'lib/caffe2/install/lib/libCaffe2_CPU.a',
-                                'lib/caffe2/install/lib/libprotobuf-lite.a',
-                                'lib/caffe2/install/lib/libprotobuf.a',
-                                'lib/caffe2/build_ios_pod/libCAFFE2_NNPACK.a',
-                                'lib/caffe2/build_ios_pod/libCAFFE2_PTHREADPOOL.a'
+      ss.vendored_libraries  = 'install/lib/libCaffe2_CPU.a',
+                                'install/lib/libprotobuf-lite.a',
+                                'install/lib/libprotobuf.a',
+                                'install/lib/libCAFFE2_NNPACK.a',
+                                'install/lib/libCAFFE2_PTHREADPOOL.a'
       ss.libraries =  'stdc++'
     end
     
@@ -49,18 +47,5 @@ Pod::Spec.new do |s|
       "Accelerate",
       "UIKit",
     ]
-
-    s.prepare_command = <<-CMD
-      # build
-      scripts/build_ios_pod.sh
-      
-      # copy missing protoc files to build directory.
-      # Not sure why they are in the wrong location
-      cp lib/caffe2/build_host_protoc/lib/libprotoc.a lib/caffe2/build_ios_pod/third_party/protobuf/cmake/libprotoc.a
-      cp lib/caffe2/build_host_protoc/bin/protoc lib/caffe2/build_ios_pod/third_party/protobuf/cmake/protoc
-      
-      # install
-      cd lib/caffe2/build_ios_pod
-      make install
-    CMD
+    s.libraries =  'stdc++'
 end
