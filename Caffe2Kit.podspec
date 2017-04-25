@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'Caffe2Kit'
-    s.version          = '0.0.4'
+    s.version          = '0.0.5'
     s.summary          = 'Caffe2 for iOS (Swift, ObjC). A simple one step integration'
 
     s.description      = <<-DESC
@@ -31,7 +31,8 @@ Pod::Spec.new do |s|
       ss.preserve_paths = 'install/include/**/*.h', 'install/include/Eigen/*', 'lib/caffe2/LICENSE', 'lib/caffe2/PATENTS'
 
       ss.xcconfig = {
-        'HEADER_SEARCH_PATHS' =>  '$(inherited) "$(PODS_ROOT)/Caffe2Kit/install/include/" "$(PODS_ROOT)/Caffe2Kit/install/include/Eigen/"'
+        'HEADER_SEARCH_PATHS' =>  '$(inherited) "$(PODS_ROOT)/Caffe2Kit/install/include/" "$(PODS_ROOT)/Caffe2Kit/install/include/Eigen/"',
+        'OTHER_LDFLAGS' => '-force_load "$(PODS_ROOT)/Caffe2Kit/install/lib/libCaffe2_CPU.a"'
         #'OTHER_LDFLAGS' => '$(inherited) -Wl,-force_load,$(PODS_ROOT)/Caffe2Kit/install/lib/libCaffe2_CPU.a'
       }
       
@@ -47,4 +48,5 @@ Pod::Spec.new do |s|
       "Accelerate",
       "UIKit",
     ]
+    s.libraries =  'stdc++'
 end

@@ -22,10 +22,12 @@ $CAFFE2_ROOT/scripts/build_host_protoc.sh || exit 1
 echo "Building caffe2"
 cd $BUILD_ROOT
 
+USE_NNPACK=ON
 if [ -z ${IOS_PLATFORM+x} ]; then
   # IOS_PLATFORM is not set, in which case we will default to OS, which
   # builds iOS.
   IOS_PLATFORM=SIMULATOR
+  USE_NNPACK=OFF
 fi
 if [ -z ${INSTALL_DIR+x} ]; then
   # INSTALL_DIR is not set, in which case we will default to ../install
@@ -34,11 +36,6 @@ fi
 if [ -z ${BUILD_TYPE+x} ]; then
 BUILD_TYPE=Release
 fi
-
-if [ -z ${USE_NNPACK+x} ]; then
-USE_NNPACK=ON
-fi
-
 
 echo "Building for $IOS_PLATFORM"
 echo "Installing to $INSTALL_DIR"
