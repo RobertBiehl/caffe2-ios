@@ -79,5 +79,5 @@ lipo -create \
 
 # copy headers
 mkdir -p "$INSTALL_ROOT_DIR/include"
-cp -rf "$INSTALL_ROOT_DIR/arm/include/*" "$INSTALL_ROOT_DIR/include"
+cp -rf "$INSTALL_ROOT_DIR/arm/include/*" "$INSTALL_ROOT_DIR/include/"
 cp -rf "$CAFFE2_ROOT/third_party/eigen/Eigen/*" "$INSTALL_ROOT_DIR/include/Eigen/"
