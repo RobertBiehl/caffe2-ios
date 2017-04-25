@@ -7,7 +7,6 @@ A simple integration into existing projects.
 [![Twitter](https://img.shields.io/badge/Twitter-robeffect-4099FF.svg?style=flat)](https://twitter.com/robeffect)
 [![Caffe2](https://img.shields.io/badge/Dep-caffe2-green.svg)](https://caffe2.ai)
 [![Req](https://img.shields.io/badge/Req-iOS_10.3-green.svg)](https://github.com/RobertBiehl/caffe2-ios)
-[![Build time](https://img.shields.io/badge/pod_install_takes-0h_40m_45s-red.svg)](https://github.com/RobertBiehl/caffe2-ios)
 
 ## 🚨 Attention
 > Please note that this pod is in a very early stage and currently has multiple shortcomings:
@@ -43,7 +42,7 @@ and disable bitcode for your Target by setting **Build Settings -> Enable Bitcod
 ### Additional steps:
 *These steps will hopefully be removed in later versions.*
 1) in **Build Phases -> Your Target -> Link Binary with Libraries** add `libstc++.tdb`.
-2) in **Build Settings -> Other Linker Flags** remove `$(inherited)`and `-force_load "$(PODS_ROOT)/Caffe2Kit/install/lib/libCaffe2_CPU.a"`
+2) in **Build Settings -> Other Linker Flags** remove `$(inherited)`and `-force_load "$(PODS_ROOT)/Caffe2Kit/install/lib/libCaffe2_CPU.a"` from the list.
 
 ## 🚀 Using Caffe2Kit
 
