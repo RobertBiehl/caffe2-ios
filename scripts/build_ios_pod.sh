@@ -10,7 +10,7 @@
 CAFFE2_ROOT="$( cd "$(dirname "$0")"/../lib/caffe2 ; pwd -P)"
 echo "Caffe2 codebase root is: $CAFFE2_ROOT"
 # We are going to build the target into build_ios_pod.
-BUILD_ROOT=$CAFFE2_ROOT/build_ios_pod
+BUILD_ROOT=$CAFFE2_ROOT/$BUILD_DIR
 mkdir -p $BUILD_ROOT
 echo "Build Caffe2 ios into: $BUILD_ROOT"
 
@@ -25,17 +25,33 @@ cd $BUILD_ROOT
 if [ -z ${IOS_PLATFORM+x} ]; then
   # IOS_PLATFORM is not set, in which case we will default to OS, which
   # builds iOS.
-  IOS_PLATFORM=OS
+  IOS_PLATFORM=SIMULATOR
 fi
+if [ -z ${INSTALL_DIR+x} ]; then
+  # INSTALL_DIR is not set, in which case we will default to ../install
+  INSTALL_DIR="../install"
+fi
+if [ -z ${BUILD_TYPE+x} ]; then
+BUILD_TYPE=Release
+fi
+
+if [ -z ${USE_NNPACK+x} ]; then
+USE_NNPACK=ON
+fi
+
+
+echo "Building for $IOS_PLATFORM"
+echo "Installing to $INSTALL_DIR"
 
 cmake .. \
   -DCMAKE_TOOLCHAIN_FILE=$CAFFE2_ROOT/third_party/ios-cmake/toolchain/iOS.cmake\
-  -DCMAKE_INSTALL_PREFIX=../install \
-  -DCMAKE_BUILD_TYPE=Release \
+  -DCMAKE_INSTALL_PREFIX="$INSTALL_DIR" \
+  -DCMAKE_BUILD_TYPE=${BUILD_TYPE} \
   -DIOS_PLATFORM=${IOS_PLATFORM} \
   -DUSE_CUDA=OFF \
   -DBUILD_TEST=OFF \
   -DBUILD_BINARY=OFF \
+  -DUSE_NNPACK=${USE_NNPACK} \
   -DUSE_LMDB=OFF \
   -DUSE_LEVELDB=OFF \
   -DUSE_OPENCV=OFF \
