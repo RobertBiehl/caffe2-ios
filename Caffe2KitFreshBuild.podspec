@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-    s.name             = 'Caffe2Kit'
+    s.name             = 'Caffe2KitFreshBuild'
     s.version          = '0.0.1'
     s.summary          = 'Caffe2 for iOS (Swift, ObjC). A simple one step integration'
 
