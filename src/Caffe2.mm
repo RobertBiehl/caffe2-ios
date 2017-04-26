@@ -20,16 +20,6 @@ void ReadProtoIntoNet(std::string fname, caffe2::NetDef* net) {
   close(file);
 }
 
-std::string FilePathForResourceName(NSString* name, NSString* extension) {
-  NSString* file_path = [[NSBundle mainBundle] pathForResource:name ofType:extension];
-  if (file_path == NULL) {
-    LOG(FATAL) << "Couldn't find '" << [name UTF8String] << "."
-    << [extension UTF8String] << "' in bundle.";
-    return nullptr;
-  }
-  return file_path.UTF8String;
-}
-
 @interface Caffe2(){
   caffe2::NetDef _initNet;
   caffe2::NetDef _predictNet;
@@ -42,17 +32,38 @@ std::string FilePathForResourceName(NSString* name, NSString* extension) {
 
 @implementation Caffe2
 
-- (instancetype) init:(nonnull NSString*) initNetFilename predict:(nonnull NSString*) predictNetFilename{
-  self = [super init];
-  if(self){
-    
-    ReadProtoIntoNet(FilePathForResourceName(initNetFilename, @"pb"), &_initNet);
-    ReadProtoIntoNet(FilePathForResourceName(predictNetFilename, @"pb"), &_predictNet);
-    
-    _predictNet.set_name("PredictNet");
-    _predictor = new caffe2::Predictor(_initNet, _predictNet);
-  }
-  return self;
+- (NSString*)pathToResourceNamed:(NSString*)name error:(NSError **)error {
+    NSString* netName = [[NSBundle mainBundle] pathForResource:name ofType: @"pb"];
+    if (netName == NULL) {
+        NSMutableDictionary* details = [NSMutableDictionary dictionary];
+        [details setValue:[NSString stringWithFormat:@"File named \"%@\" not found in main bundle", name] forKey:NSLocalizedDescriptionKey];
+        *error = [[NSError alloc] initWithDomain:@"Caffe2" code:1 userInfo:details];
+        return nil;
+    }
+    return netName;
+}
+
+- (instancetype) init:(nonnull NSString*)initNetFilename predict:(nonnull NSString*)predictNetFilename error:(NSError **)error {
+    self = [super init];
+    if(self){
+        NSString* initNetPath = [self pathToResourceNamed:initNetFilename error:error];
+        NSString* predictNetPath = [self pathToResourceNamed:predictNetFilename error:error];
+        
+        if (initNetPath == nil || predictNetPath == nil) {
+            return nil;
+        }
+        
+        ReadProtoIntoNet(initNetPath.UTF8String, &_initNet);
+        ReadProtoIntoNet(predictNetPath.UTF8String, &_predictNet);
+        
+        _predictNet.set_name("PredictNet");
+        _predictor = new caffe2::Predictor(_initNet, _predictNet);
+    }
+    return self;
+}
+
+-(void)dealloc {
+    google::protobuf::ShutdownProtobufLibrary();
 }
 
 - (nullable NSArray<NSNumber*>*) predict:(nonnull UIImage*) image{

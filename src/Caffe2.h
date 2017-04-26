@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface Caffe2 : NSObject
+@interface Caffe2: NSObject
+- (null_unspecified instancetype)init UNAVAILABLE_ATTRIBUTE;
 
-- (instancetype) init:(nonnull NSString*) initNetFilename predict:(nonnull NSString*) predictNetFilename;
+- (null_unspecified instancetype) init:(nonnull NSString*)initNetFilename predict:(nonnull NSString*)predictNetFilename error:(NSError**)error
+NS_SWIFT_NAME(init(initializingNetNamed:predictingNetNamed:));
 
-- (nullable NSArray<NSNumber*>*) predict:(nonnull UIImage*) image;
-
+- (nullable NSArray<NSNumber*>*) predict:(nonnull UIImage*) image
+NS_SWIFT_NAME(prediction(regarding:));
 @end
