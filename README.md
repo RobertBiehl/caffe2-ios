@@ -10,8 +10,7 @@ A simple integration into existing projects.
 
 ## 🚨 Attention
 > Please note that this pod is in a very early stage and currently has multiple shortcomings:
-> * Only works on the device! -- *no simulator support*
-> * No officially on CocoaPods yet! -- *because this lib does not run on the simulator yet* 
+> * Not officially on CocoaPods yet!
 > * Only runs on iOS 10.3! -- *should be fixed soon by udating the build_ios_pod.sh build script*
 > * Wrapper currently only supports classification tasks.
 
