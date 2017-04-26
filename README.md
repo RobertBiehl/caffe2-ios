@@ -49,24 +49,22 @@ and disable bitcode for your Target by setting **Build Settings -> Enable Bitcod
 import Caffe2Kit
 
 do {
-    let caffe = try Caffe2(initNetNamed: "squeeze_init_net", predictNetNamed:"squeeze_predict_net")
-    let 🌅 = #imageLiteral(resourceName: "lion.png")
+  let caffe = try Caffe2(initNetNamed: "squeeze_init_net", predictNetNamed:"squeeze_predict_net")
+  let 🌅 = #imageLiteral(resourceName: "lion.png")
 
-    if let res = self.caffe?.prediction(regarding:🌅) {
-    // find top 5 classes
-    let sorted = res
-      .map{$0.floatValue}
-      .enumerated()
-      .sorted(by: {$0.element > $1.element})[0...5]
+  if let res = self.caffe?.prediction(regarding:🌅) {
+  // find top 5 classes
+  let sorted = res
+    .map{$0.floatValue}
+    .enumerated()
+    .sorted(by: {$0.element > $1.element})[0...5]
 
-    // generate output
-    let text = sorted
-      .map{"\($0.offset): \(classes[$0.offset]) \($0.element*100)%"}
-      .joined(separator: "\n")
+  // generate output
+  let text = sorted
+    .map{"\($0.offset): \(classes[$0.offset]) \($0.element*100)%"}
+    .joined(separator: "\n")
 
-    print("Result\n \(text)")
-  }
-
+  print("Result\n \(text)")
 } catch _ {
   // model could not be loaded
 }
