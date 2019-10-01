@@ -1,9 +1,10 @@
 #!/bin/bash
+set -e -o nounset
 
 SCRIPTS_DIR="$( cd "$(dirname "$0")"; pwd -P)"
 CAFFE2_ROOT="$( cd "$(dirname "$0")"/../lib/caffe2 ; pwd -P)"
-
 INSTALL_ROOT_DIR="$SCRIPTS_DIR/../install"
+
 mkdir -p $INSTALL_ROOT_DIR
 
 ## SIMULATOR
@@ -17,8 +18,7 @@ cd "$CAFFE2_ROOT/$BUILD_DIR"
 # copy missing protoc files to build directory... not sure why they are in the wrong location
 cp -rf $CAFFE2_ROOT/build_host_protoc/lib/libprotoc.a ./third_party/protobuf/cmake/libprotoc.a
 cp -rf $CAFFE2_ROOT/build_host_protoc/bin/protoc ./third_party/protobuf/cmake/protoc
-
-#make install
+make install
 
 ## DEVICE
 # Build for iOS
@@ -31,8 +31,7 @@ cd "$CAFFE2_ROOT/$BUILD_DIR"
 # copy missing protoc files to build directory... not sure why they are in the wrong location
 cp -rf $CAFFE2_ROOT/build_host_protoc/lib/libprotoc.a ./third_party/protobuf/cmake/libprotoc.a
 cp -rf $CAFFE2_ROOT/build_host_protoc/bin/protoc ./third_party/protobuf/cmake/protoc
-
-#make install
+make install
 
 # Build for WatchOS
 BUILD_DIR="build_watchos_pod"
@@ -44,8 +43,7 @@ cd "$CAFFE2_ROOT/$BUILD_DIR"
 # copy missing protoc files to build directory... not sure why they are in the wrong location
 cp -rf $CAFFE2_ROOT/build_host_protoc/lib/libprotoc.a ./third_party/protobuf/cmake/libprotoc.a
 cp -rf $CAFFE2_ROOT/build_host_protoc/bin/protoc ./third_party/protobuf/cmake/protoc
-
-#make install
+make install
 
 # merge static libs (fat binaries)
 mkdir -p "$INSTALL_ROOT_DIR/lib/"
@@ -54,14 +52,13 @@ lipo -create \
   -output "$INSTALL_ROOT_DIR/lib/libCAFFE2_NNPACK.a"
 
 lipo -create \
-"$CAFFE2_ROOT/build_ios_pod/libCAFFE2_PTHREADPOOL.a" \
--output "$INSTALL_ROOT_DIR/lib/libCAFFE2_PTHREADPOOL.a"
-
+  "$CAFFE2_ROOT/build_ios_pod/libCAFFE2_PTHREADPOOL.a" \
+  -output "$INSTALL_ROOT_DIR/lib/libCAFFE2_PTHREADPOOL.a"
 
 lipo -create \
-"$INSTALL_ROOT_DIR/arm/lib/libCaffe2_CPU.a" \
-"$INSTALL_ROOT_DIR/x86_64/lib/libCaffe2_CPU.a" \
--output "$INSTALL_ROOT_DIR/lib/libCaffe2_CPU.a"
+  "$INSTALL_ROOT_DIR/arm/lib/libCaffe2_CPU.a" \
+  "$INSTALL_ROOT_DIR/x86_64/lib/libCaffe2_CPU.a" \
+  -output "$INSTALL_ROOT_DIR/lib/libCaffe2_CPU.a"
 
 lipo -create \
 "$INSTALL_ROOT_DIR/arm/lib/libprotobuf-lite.a" \
@@ -75,5 +72,5 @@ lipo -create \
 
 # copy headers
 mkdir -p "$INSTALL_ROOT_DIR/include"
-cp -rf "$INSTALL_ROOT_DIR/arm/include/*" "$INSTALL_ROOT_DIR/include/"
-cp -rf "$CAFFE2_ROOT/third_party/eigen/Eigen/*" "$INSTALL_ROOT_DIR/include/Eigen/"
+cp -rf "$INSTALL_ROOT_DIR/arm/include/" "$INSTALL_ROOT_DIR/include/"
+cp -rf "$CAFFE2_ROOT/third_party/eigen/Eigen/" "$INSTALL_ROOT_DIR/include/Eigen/"

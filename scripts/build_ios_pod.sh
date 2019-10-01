@@ -27,8 +27,12 @@ if [ -z ${IOS_PLATFORM+x} ]; then
   # IOS_PLATFORM is not set, in which case we will default to OS, which
   # builds iOS.
   IOS_PLATFORM=SIMULATOR
+fi
+
+if [ "$IOS_PLATFORM" = "SIMULATOR" ]; then
   USE_NNPACK=OFF
 fi
+
 if [ -z ${INSTALL_DIR+x} ]; then
   # INSTALL_DIR is not set, in which case we will default to ../install
   INSTALL_DIR="../install"
@@ -39,7 +43,6 @@ fi
 
 echo "Building for $IOS_PLATFORM"
 echo "Installing to $INSTALL_DIR"
-
 cmake .. \
   -DCMAKE_TOOLCHAIN_FILE=$CAFFE2_ROOT/third_party/ios-cmake/toolchain/iOS.cmake\
   -DCMAKE_INSTALL_PREFIX="$INSTALL_DIR" \

@@ -31,15 +31,15 @@ Pod::Spec.new do |s|
       ss.preserve_paths = 'install/include/**/*.h', 'install/include/Eigen/*', 'lib/caffe2/LICENSE', 'lib/caffe2/PATENTS'
 
       ss.xcconfig = {
-        'HEADER_SEARCH_PATHS' =>  '$(inherited) "$(PODS_ROOT)/Caffe2Kit/install/include/" "$(PODS_ROOT)/Caffe2Kit/install/include/Eigen/"',
-        'OTHER_LDFLAGS' => '-force_load "$(PODS_ROOT)/Caffe2Kit/install/lib/libCaffe2_CPU.a"'
+        'HEADER_SEARCH_PATHS' =>  '$(inherited) "$(PODS_TARGET_SRCROOT)/install/include/" "$(PODS_TARGET_SRCROOT)/install/include/Eigen/"',
+        'OTHER_LDFLAGS' => '-force_load "$(PODS_TARGET_SRCROOT)/install/lib/libCaffe2_CPU.a"'
       }
 
       ss.vendored_libraries  = 'install/lib/libCaffe2_CPU.a',
-                                'install/lib/libprotobuf-lite.a',
-                                'install/lib/libprotobuf.a',
-                                'install/lib/libCAFFE2_NNPACK.a',
-                                'install/lib/libCAFFE2_PTHREADPOOL.a'
+                               'install/lib/libprotobuf-lite.a',
+                               'install/lib/libprotobuf.a',
+                               'install/lib/libCAFFE2_NNPACK.a',
+                               'install/lib/libCAFFE2_PTHREADPOOL.a'
       ss.libraries =  'stdc++'
     end
 
